@@ -14,34 +14,48 @@
 	</div>
 	
 	<div class="main">
-		<ol>
-			<li class="row">
-				<a href="/item">
-					
-					<h4 class="title">Thread 1</h4>
-
-					<div class="bottom">
-						<p class="timestamp">10/10/2020</p>
-						<p class="comment-count">4 comments</p>
-					</div>
-
-				</a>
-			</li>
-
-			<li class="row">
-				<a href="/item">
-					
-					<h4 class="title">Thread 2</h4>
-
-					<div class="bottom">
-						<p class="timestamp">10/09/2020</p>
-						<p class="comment-count">10 comments</p>
-					</div>
-
-				</a>
-			</li>
-		</ol>
+		<ol></ol>
 	</div>
+
+	<script src="data.js"></script>
+
+	<script>
+		console.log(threads);
+
+		var container = document.querySelector('ol');
+
+		// Looping through each thread to create the html row
+		for (let thread of threads) {
+
+			// Pasting html with backtick so it's a string we can replace the values of
+			var html = `
+
+			<li class="row">
+
+				<a href="/thread.html?${thread.id}">
+					
+					<h4 class="title">
+						${thread.title}
+					</h4>
+
+					<div class="bottom">
+						
+						<p class="timestamp">
+							${new Date(thread.date).toLocaleString()}
+						</p>
+
+						<p class="comment-count">
+							${thread.comments.length} comments
+						</p>
+
+					</div>
+				</a>
+			</li>
+			`
+			// Insert adjacent html method to convert above string inside the container
+			container.insertAdjacentHTML('beforeend', html);
+		}
+	</script>
 
 </body>
 </html>

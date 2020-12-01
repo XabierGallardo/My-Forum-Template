@@ -8,42 +8,84 @@
 </head>
 
 <body>
+
 	<div class="top-bar">		
 		<h1>My Forum</h1>
 	</div>
 
 	<div class="main">
-		
-		<div class="header">
-
-			<h4 class="title">Thread 1</h4>
-			<div class="bottom">
-				<p class="timestamp">10/10/2020</p>
-				<p class="comment-count">4 comments</p>
-			</div>
-		</div>
-
+		<div class="header"></div>
+	</div>
 
 		<textarea></textarea>
 		<button>Add comment</button>
 
-		<div class="comments">
+		<div class="comments"></div>
 
-			<div class="comment">
-
-				<div class="top-comment">
-
-					<p class="user">Liam</p>
-					<p class="timestamp">10/10/2020</p>
-				</div>
-
-				<div class="comment-content">
-					Comment text here	
-				</div>
-
-			</div>
-		</div>
 	</div>
+
+	<script src="data.js"></script>
+
+	<script>
+		
+		// Extract the id from the URL with the window.locate.seatch browser object and slice off "?"
+		var id = window.location.search.slice(1);
+
+		// Search through our threads for the specific id that we want to pull it out the thread array
+		var thread = threads.find(t => t.id == id);
+
+		console.log(threads);
+
+		// Rendering header section replacing the variables dynamically
+		var header = document.querySelector('.header');
+
+		var headerHtml = `
+
+				<h4 class="title">
+					${thread.title}
+				</h4>
+
+				<div class="bottom">
+					<p class="timestamp">
+						${new Date(thread.date).toLocaleString()}
+					</p>
+					<p class="comment-count">
+						${thread.comments.length} comments
+					</p>
+				</div>
+			`
+			header.insertAdjacentHTML('beforeend', headerHtml);
+
+		// Rendering comment sub-array by looping through the comments property
+		var comments = document.querySelector('.comments');
+
+		for (let comment of thread.comments) {
+			var commentHtml = `
+
+				<div class="comment">
+
+					<div class="top-comment">
+
+						<p class="user">
+							${comment.author}
+						</p>
+
+						<p class="comment-ts">
+							${new Date(comment.date).toLocaleString()}
+						</p>
+
+					</div>
+
+					<div class="comment-content">
+						${comment.content}	
+					</div>
+
+				</div>
+			`
+			comments.insertAdjacentHTML('beforeend', commentHtml);
+		}
+
+	</script>
 
 </body>
 </html>

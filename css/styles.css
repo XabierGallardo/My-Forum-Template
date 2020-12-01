@@ -29,6 +29,10 @@ button {
 	padding: 10px 15px;
 }
 
+.comments { margin: 40px 0; }
+
+.comment { margin: 20px 0; }
+
 .row { padding: 5px 0; }
 
 .bottom { 
