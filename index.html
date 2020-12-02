@@ -27,12 +27,12 @@
 		// Looping through each thread to create the html row
 		for (let thread of threads) {
 
-			// Pasting html with backtick so it's a string we can replace the values of
+			// Pasting html with backtick so it's a string we can replace the values of it
 			var html = `
 
 			<li class="row">
 
-				<a href="/thread.html?${thread.id}">
+				<a href="/My-Forum-Template/thread.html?${thread.id}">
 					
 					<h4 class="title">
 						${thread.title}
@@ -52,6 +52,8 @@
 				</a>
 			</li>
 			`
+			// Alternative URL <a href="/thread.html?${thread.id}">
+
 			// Insert adjacent html method to convert above string inside the container
 			container.insertAdjacentHTML('beforeend', html);
 		}
