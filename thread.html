@@ -9,8 +9,10 @@
 
 <body>
 
-	<div class="top-bar">		
-		<h1>My Forum</h1>
+	<div class="top-bar">
+		<a href="index.html"> <!-- Returning to homepage -->
+			<h1>My Forum</h1>
+		</a>		
 	</div>
 
 	<div class="main">
@@ -56,7 +58,6 @@
 			header.insertAdjacentHTML('beforeend', headerHtml);
 
 
-
 		function addComment(comment) {
 
 			var commentHtml = `
@@ -82,12 +83,14 @@
 			comments.insertAdjacentHTML('beforeend', commentHtml);
 		}
 
+
 		// Rendering comment sub-array by looping through the comments property
 		var comments = document.querySelector('.comments');
 
 		for (let comment of thread.comments) {
 			addComment(comment);
 		}
+
 
 		//Adding comments
 		var btn = document.querySelector('button');
@@ -99,15 +102,19 @@
 			var comment = {
 				content: txt.value,
 				date: Date.now(),
-				author: 'Diarmuid'
+				author: 'Xabier'
 			}
-			
+
 			addComment(comment);
 
 			//Reseting textarea value
 			txt.value = '';
-		});
 
+			// Updating the key object on the localStorage for each new comment added
+			thread.comments.push(comment);
+			localStorage.setItem('threads', JSON.stringify(threads));
+		});
+		
 	</script>
 
 </body>
