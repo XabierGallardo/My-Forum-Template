@@ -1,121 +1,158 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-	<title>Thread</title>
-	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
-</head>
+	<head>
 
-<body>
+		<title>Thread</title>
+		<meta charset="utf-8">
 
-	<div class="top-bar">
-		<a href="index.html"> <!-- Returning to homepage -->
-			<h1>My Forum</h1>
-		</a>		
-	</div>
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="css/styles.css">
 
-	<div class="main">
-		<div class="header"></div>
-	</div>
+	</head>
+
+	<body>
+
+		<div class="top-bar">
+
+			<!-- Returning to homepage -->
+			<a href="index.html">
+
+				<h1>My Forum</h1>
+
+			</a>
+
+		</div>
+
+
+		<div class="main">
+
+			<div class="header"></div>
+
+		</div>
+
 
 		<textarea></textarea>
+
+
 		<button>Add comment</button>
+
 
 		<div class="comments"></div>
 
-	</div>
 
-	<script src="data.js"></script>
+		<!-- JavaScript -->
+		<script src="data.js"></script>
 
-	<script>
-		
-		// Extract the id from the URL with the window.locate.seatch browser object and slice off "?"
-		var id = window.location.search.slice(1);
+		<script>
+			
+			// Extract the id from the URL with the window.locate.search browser object and slice off "?"
+			var id = window.location.search.slice(1);
 
-		// Search through our threads for the specific id that we want to pull it out the thread array
-		var thread = threads.find(t => t.id == id);
+			// Search through our threads for the specific id that we want to pull it out the thread array
+			var thread = threads.find(t => t.id == id);
 
-		console.log(threads);
+			console.log(threads);
 
-		// Rendering header section replacing the variables dynamically
-		var header = document.querySelector('.header');
+			// Rendering header section replacing the variables dynamically
+			var header = document.querySelector('.header');
 
-		var headerHtml = `
-				<h4 class="title">
-					${thread.title}
-				</h4>
+			var headerHtml = `
+					<h4 class="title">
 
-				<div class="bottom">
-					<p class="timestamp">
-						${new Date(thread.date).toLocaleString()}
-					</p>
-					<p class="comment-count">
-						${thread.comments.length} comments
-					</p>
-				</div>
-			`
-			header.insertAdjacentHTML('beforeend', headerHtml);
+						${thread.title}
 
+					</h4>
 
-		function addComment(comment) {
+					<div class="bottom">
 
-			var commentHtml = `
-				<div class="comment">
+						<p class="timestamp">
 
-					<div class="top-comment">
+							${new Date(thread.date).toLocaleString()}
 
-						<p class="user">
-							${comment.author}
 						</p>
 
-						<p class="comment-ts">
-							${new Date(comment.date).toLocaleString()}
+						<p class="comment-count">
+
+							${thread.comments.length} comments
+
 						</p>
+					</div>
+				`
+				header.insertAdjacentHTML('beforeend', headerHtml);
+
+
+			function addComment(comment) {
+
+				var commentHtml = `
+					<div class="comment">
+
+						<div class="top-comment">
+
+							<p class="user">
+
+								${comment.author}
+
+							</p>
+
+							<p class="comment-ts">
+
+								${new Date(comment.date).toLocaleString()}
+
+							</p>
+
+						</div>
+
+						<div class="comment-content">
+
+							${comment.content}
+
+						</div>
 
 					</div>
-
-					<div class="comment-content">
-						${comment.content}	
-					</div>
-				</div>
-			`
-			comments.insertAdjacentHTML('beforeend', commentHtml);
-		}
-
-
-		// Rendering comment sub-array by looping through the comments property
-		var comments = document.querySelector('.comments');
-
-		for (let comment of thread.comments) {
-			addComment(comment);
-		}
-
-
-		//Adding comments
-		var btn = document.querySelector('button');
-		btn.addEventListener('click', function() {
-
-			var txt = document.querySelector('textarea');
-
-			//Select the value of the text area and adding the string onto the page
-			var comment = {
-				content: txt.value,
-				date: Date.now(),
-				author: 'Xabier'
+				`
+				comments.insertAdjacentHTML('beforeend', commentHtml);
 			}
 
-			addComment(comment);
 
-			//Reseting textarea value
-			txt.value = '';
+			// Rendering comment sub-array by looping through the comments property
+			var comments = document.querySelector('.comments');
 
-			// Updating the key object on the localStorage for each new comment added
-			thread.comments.push(comment);
-			localStorage.setItem('threads', JSON.stringify(threads));
-		});
-		
-	</script>
+			for (let comment of thread.comments) {
 
-</body>
+				addComment(comment);
+			}
+
+
+			//Adding comments
+			var btn = document.querySelector('button');
+
+			btn.addEventListener('click', function() {
+
+				var txt = document.querySelector('textarea');
+
+				//Select the value of the text area and adding the string onto the page
+				var comment = {
+
+					content: txt.value,
+					date: Date.now(),
+					author: 'Xabier'
+				}
+
+				addComment(comment);
+
+				//Reseting textarea value
+				txt.value = '';
+
+				// Updating the key object on the localStorage for each new comment added
+				thread.comments.push(comment);
+
+				localStorage.setItem('threads', JSON.stringify(threads));
+
+			});
+			
+		</script>
+
+	</body>
+
 </html>

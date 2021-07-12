@@ -1,63 +1,74 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-	<title>Forum</title>
-	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
-</head>
+	<head>
 
-<body>
+		<title>Forum</title>
+		<meta charset="utf-8">
 
-	<div class="top-bar">		
-		<h1>My Forum</h1>
-	</div>
-	
-	<div class="main">
-		<ol></ol>
-	</div>
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="css/styles.css">
 
-	<script src="data.js"></script>
+	</head>
 
-	<script>
-		console.log(threads);
+	<body>
 
-		var container = document.querySelector('ol');
+		<div class="top-bar">
 
-		// Looping through each thread to create the html row
-		for (let thread of threads) {
+			<h1>My Forum</h1>
 
-			// Pasting html with backtick so it's a string we can replace the values of it
-			var html = `
-
-			<li class="row">
-
-				<a href="/My-Forum-Template/thread.html?${thread.id}">
-					
-					<h4 class="title">
-						${thread.title}
-					</h4>
-
-					<div class="bottom">
-						
-						<p class="timestamp">
-							${new Date(thread.date).toLocaleString()}
-						</p>
-
-						<p class="comment-count">
-							${thread.comments.length} comments
-						</p>
-
-					</div>
-				</a>
-			</li>
-			`
-
-			// Insert adjacent html method to convert above string inside the container
-			container.insertAdjacentHTML('beforeend', html);
-		}
+		</div>
 		
-	</script>
+		<div class="main">
 
-</body>
+			<ol></ol>
+
+		</div>
+
+
+		<!-- JavaScript -->
+		<script src="data.js"></script>
+
+		<script>
+			console.log(threads);
+
+			var container = document.querySelector('ol');
+
+			// Looping through each thread to create the html row
+			for (let thread of threads) {
+
+				// Pasting html with backtick so it's a string we can replace the values of it
+				var html = `
+
+				<li class="row">
+
+					<a href="/My-Forum-Template/thread.html?${thread.id}">
+						
+						<h4 class="title">
+							${thread.title}
+						</h4>
+
+						<div class="bottom">
+							
+							<p class="timestamp">
+								${new Date(thread.date).toLocaleString()}
+							</p>
+
+							<p class="comment-count">
+								${thread.comments.length} comments
+							</p>
+
+						</div>
+					</a>
+				</li>
+				`
+
+				// Insert adjacent html method to convert above string inside the container
+				container.insertAdjacentHTML('beforeend', html);
+			}
+			
+		</script>
+
+	</body>
+
 </html>

@@ -22,7 +22,7 @@ var defaultThreads = [
 				content: "The cráic is mighty!"
 			}
 		]
-	},	
+	},
 	{
 		id: 2,
 		title: "Thread 2",
